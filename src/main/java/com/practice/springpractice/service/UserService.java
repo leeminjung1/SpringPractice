@@ -7,6 +7,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.NoSuchElementException;
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -14,6 +17,7 @@ public class UserService{
 
     private final UserRepository userRepository;
 
+    // signup
     public String signup(UserRequest request){
         userRepository.save(User.builder()
                 .userId(request.getUserId())
@@ -22,4 +26,19 @@ public class UserService{
                 .build());
         return "Success";
     }
+
+    // login
+    public String login(String userId, String password) {
+        Optional<User> user = userRepository.findByUserId(userId);
+        return user
+                .map(m -> {
+                    if(user.get().getPassword().equals(password)) {
+                        return "Success";
+                    }
+                    return "Failed";
+                })
+                .orElseThrow(() -> new NoSuchElementException("Person not found"));
+    }
+
+
 }
