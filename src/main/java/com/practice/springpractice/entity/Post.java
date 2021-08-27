@@ -14,17 +14,18 @@ public class Post {
 
     @Id
     @GeneratedValue
-    private long seq;
+    private Long postNum;
 
     @Setter
-    @Column(nullable = false)
+    @Column
     private String postTitle;
 
     @Setter
-    @Column(nullable = false)
+    @Column
     private String postContents;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId")    // FK
+    @JoinColumn(name = "userNum")    // FK
     private User user;
+
 }

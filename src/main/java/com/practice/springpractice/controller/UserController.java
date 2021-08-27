@@ -6,10 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @Slf4j
@@ -40,5 +37,22 @@ public class UserController {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
+    // update password
+    @PatchMapping("/{userNum}")
+    public ResponseEntity updatePassword(@PathVariable Long userNum, @RequestBody UserRequest request) {
+        if(userService.updatePassword(userNum, request).equals("Success")) {
+            return new ResponseEntity(HttpStatus.OK);
+        }
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
+    // delete user
+    @DeleteMapping("/delete/{userId}")
+    public ResponseEntity deleteUser(@PathVariable String userId) {
+        if(userService.deleteUser(userId).equals("Success")) {
+            return new ResponseEntity(HttpStatus.OK);
+        }
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
 
 }

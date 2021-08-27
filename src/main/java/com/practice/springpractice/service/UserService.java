@@ -40,5 +40,22 @@ public class UserService{
                 .orElseThrow(() -> new NoSuchElementException("Person not found"));
     }
 
+    // Updating password
+    public String updatePassword(Long userId, UserRequest request) {
+        Optional<User> user = userRepository.findById(userId);
+        request.updateEntity(user.get());
+        userRepository.save(user.get());
+        return "Success";
+    }
 
+    // delete account
+    public String deleteUser(String userId) {
+        Optional<User> user = userRepository.findByUserId(userId);
+        userRepository.delete(user.get());
+        return "Success";
+    }
+
+    public Optional<User> getUserFromUserId(String userId) {
+        return userRepository.findByUserId(userId);
+    }
 }

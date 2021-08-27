@@ -1,7 +1,6 @@
 package com.practice.springpractice.dto;
 
 import com.practice.springpractice.entity.Post;
-import com.practice.springpractice.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,13 +8,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public final class UserRequest {
+public class PostRequest {
+    private String postTitle;
+    private String postContents;
     private String userId;
-    private String password;
-    private String userName;
 
-    public void updateEntity(User user) {
-        user.setPassword(this.password);
+    public void updateEntity(Post post) {
+        post.setPostTitle(this.postTitle);
+        post.setPostContents(this.postContents);
     }
 
 }

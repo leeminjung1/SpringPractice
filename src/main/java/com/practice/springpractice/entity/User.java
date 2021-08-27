@@ -14,9 +14,9 @@ import javax.persistence.*;
 public class User {
     @Id             // PK
     @GeneratedValue // db에서 자동생성되는 값이라는 뜻~
-    private long seq;
+    private Long userNum;
 
-    @Column(unique = true)
+    @Column(nullable= false, unique = true)
     private String userId;
 
     @Column(nullable = false)
