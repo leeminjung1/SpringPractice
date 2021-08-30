@@ -1,6 +1,7 @@
 HELP.md
 .gradle
 build/
+resources/application-API-KEY.properties
 src/main/resources/application.properties
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
